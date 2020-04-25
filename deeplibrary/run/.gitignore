@@ -8,8 +8,8 @@
 # and this .gitignore
 !.gitignore
 
-# do NOT ignore the static directory
-!static
+# do NOT ignore everything inside it
+!static/*
 # except the README
 !static/README
 
