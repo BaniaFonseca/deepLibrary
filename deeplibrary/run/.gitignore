@@ -11,7 +11,7 @@
 # do NOT ignore the static directory
 !static
 # but everything inside it
-static/*
+#static/*
 # except the README
 !static/README
 
