@@ -1,66 +1,18 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
-<title>DeepLibrary</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-
-body, html {
-  height: 100%;
-  line-height: 1.8;
-}
-
-/* Full height image header */
-.bgimg-1 {
-  background-position: center;
-  background-size: cover;
-  background-image: url("../static/books.jpg");
-  min-height: 100%;
-}
-
-.w3-bar .w3-button {
-  padding: 16px;
-}
-
-/* search bar*/
-
-* {
-  box-sizing: border-box;
-}
-
-form.search input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
-}
-
-form.search button {
-  float: left;
-  width: 20%;
-  padding: 10px;
-  background: #2196F3;
-  color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none;
-  cursor: pointer;
-
-}
-
-form.search::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-</style>
+  <head>
+    <title>DeepLibrary</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" type="text/css"  href="{% static 'css/home.css' %}"/> 
+  
+  </head>  
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -71,7 +23,7 @@ form.search::after {
     <div class="w3-right w3-hide-small">
       <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
       <a href="#login" class="w3-bar-item w3-button"><i class="fa fa-user"></i> LOGIN</a>
-      <a href="#ctact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+      <a href="#ctact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT </a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -92,8 +44,8 @@ form.search::after {
 </nav>
 
 <!-- Header with full-height image -->
-<header class="bgimg-1 w3-display-container w3-grayscale-min " id="home">
-  
+
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">  
   <div class="w3-display-middle w3-display-bottommiddle w3-display-container" style="width: 100%;">
     <div class="w3-display-middle w3-text-white w3-padding-48" style="width: max-content;">
       <span class="w3-jumbo w3-hide-small">Hi, I'm DeepLibrary</span><br>  

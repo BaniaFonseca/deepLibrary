@@ -21,14 +21,15 @@ STATIC_ROOT = join(PROJECT_ROOT, 'run', 'static')
 MEDIA_ROOT = join(PROJECT_ROOT, 'run', 'media')
 
 # look for static assets here
-STATICFILES_DIRS = [
-    join(PROJECT_ROOT, 'static'),
-]
+STATICFILES_DIRS = (
+        join(PROJECT_ROOT, 'static'), 
+        join(PROJECT_ROOT,'apps','bookshelf' ,'static'),
+)
 
 # look for templates here
 # This is an internal setting, used in the TEMPLATES directive
 PROJECT_TEMPLATES = [
-    join(PROJECT_ROOT, 'templates'),
+    join(PROJECT_ROOT, 'templates'), 
 ]
 
 # add apps/ to the Python path
@@ -38,6 +39,15 @@ sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
 # ##### APPLICATION CONFIGURATION #########################
 
 # these are the apps
+# DEFAULT_APPS = [
+#     'django.contrib.admin',
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.messages',
+#     'django.contrib.staticfiles',
+# ]
+
 DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +55,7 @@ DEFAULT_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bookshelf',
 ]
 
 # Middlewares
@@ -90,7 +101,7 @@ SECRET_FILE = normpath(join(PROJECT_ROOT, 'run', 'SECRET.key'))
 
 # these persons receive error notification
 ADMINS = (
-    ('your name', 'your_name@example.com'),
+    ('Bania Fonseca', 'baniafonseca@outlook.com'),
 )
 MANAGERS = ADMINS
 
@@ -109,9 +120,8 @@ STATIC_URL = '/static/'
 # the URL for media files
 MEDIA_URL = '/media/'
 
-
 # ##### DEBUG CONFIGURATION ###############################
-DEBUG = False
+DEBUG = True
 
 
 # finally grab the SECRET KEY

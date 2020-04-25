@@ -1,0 +1,1 @@
+web: gunicorn deeplibrary.wsgi --log-file -
