@@ -10,8 +10,6 @@
 
 # do NOT ignore the static directory
 !static
-# but everything inside it
-#static/*
 # except the README
 !static/README
 
