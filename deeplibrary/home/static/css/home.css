@@ -10,7 +10,7 @@ body, html {
 .bgimg-1 {
   background-position: center;
   background-size: cover;
-  background-image: url("../imgs/hbd.jpg");
+  background-image: url("../imgs/book.jpg");
   min-height: 100%;
 }
 .hbd
