@@ -19,7 +19,8 @@ STATICFILES_DIRS = (
 # look for templates here
 # This is an internal setting, used in the TEMPLATES directive
 PROJECT_TEMPLATES = [
-    join(BASE_DIR, 'home', 'templates'), 
+    join(BASE_DIR, 'home', 'templates'),
+    join(BASE_DIR, 'deepshelf', 'templates'), 
 ]
 
 # Quick-start development settings - unsuitable for production
