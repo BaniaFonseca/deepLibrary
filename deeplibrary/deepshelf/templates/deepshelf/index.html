@@ -1,12 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <title> Deep Shelf</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width-device-width, initial-scale=1"/>
+        <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+        <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'css/deepshelf/index.css' %}">
     </head>
-    
     <body>
-        <h1> Hi There I am {{app_name}}</h1>
+         
+        <div class="shelf-container">
+            {% for  edocument in edocuments %}
+                <div class="w3-container w3-cell-row shelf-item">
+                    <div class="w3-cell">
+                        <img class="shelf-item-cover" src="{% static 'imgs/deepshelf/demo.jpg' %}">
+                        <p class="w3-small">{{edocument.title|title}}</p>
+                        {% if edocument.authors|length > 1 %}
+                            <p class="w3-small">By {{edocument.authors.0}} et al.</p>
+                        {% else %}
+                            <p class="w3-small">By {{edocument.authors.0}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
     </body>
 </html>

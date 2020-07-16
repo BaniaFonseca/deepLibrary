@@ -2,10 +2,15 @@ from django.views import View
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from deepshelf.models.electronicdocument import ElectronicDocument as edoc
+
 class DeepShelf(View):
 
     def get(self, request):
-        # < logic here >
-        app_name = 'DeepShelf'
+
+        ed = edoc()
+        edocuments = [ed for _ in range(20)]
+
         return render(request, 'deepshelf/index.html',
-        {'app_name': app_name}, content_type='text/html')
+            {'edocuments': edocuments}, 
+            content_type='text/html')

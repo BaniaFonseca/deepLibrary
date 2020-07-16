@@ -1,6 +1,6 @@
-from django.urls import path
+from django.urls import path, re_path
 from deepshelf.views import *
 
 urlpatterns = [
-    path('about/', DeepShelf.as_view()),
+    re_path(r'^', DeepShelf.as_view()),
 ]

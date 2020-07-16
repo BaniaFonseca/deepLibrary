@@ -14,6 +14,7 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 # look for static assets here
 STATICFILES_DIRS = (
         join(BASE_DIR, 'home', 'static'),
+        join(BASE_DIR, 'deepshelf', 'static'),
 )
 
 # look for templates here
