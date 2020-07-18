@@ -1,0 +1,35 @@
+
+.shelf-container
+{
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr) );
+    grid-template-rows: auto; 
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-row-gap: 1rem;
+    grid-column-gap: 0rem;
+    padding: 1rem;
+}
+
+.shelf-item
+{
+    height: 300px; 
+    width: 190px;
+
+    background-color: black;
+}
+
+.shelf-item-cover
+{
+    width: 180px; 
+    height: 250px;
+}
+.shelf-item-description
+{
+    width: 180px; 
+}
+
+/* .shelf-item-cover
+{
+    
+} */
