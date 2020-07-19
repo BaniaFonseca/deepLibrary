@@ -9,7 +9,7 @@ class DeepShelf(View):
     def get(self, request):
 
         ed = edoc()
-        edocuments = [ed for _ in range(20)]
+        edocuments = [ed for _ in range(6)]
 
         return render(request, 'deepshelf/shelf.html',
             {'edocuments': edocuments}, 

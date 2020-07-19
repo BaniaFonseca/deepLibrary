@@ -9,14 +9,13 @@
     grid-row-gap: 1rem;
     grid-column-gap: 0rem;
     padding: 1rem;
+    top: 12rem;
 }
 
 .shelf-item
 {
     height: 300px; 
     width: 190px;
-
-    background-color: black;
 }
 
 .shelf-item-cover
@@ -28,8 +27,3 @@
 {
     width: 180px; 
 }
-
-/* .shelf-item-cover
-{
-    
-} */
