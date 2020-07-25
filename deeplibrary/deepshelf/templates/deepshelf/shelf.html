@@ -5,6 +5,10 @@
 <link rel="stylesheet" type="text/css"  href="{% static 'css/deepshelf/shelf.css' %}"/> 
 {% endblock %} 
 
+{% block homeHeader %}
+<div style="width: 100%; height: 7rem;"> </div>
+{% endblock %}
+
 {% block content %}
 <div class="shelf-container">
     {% for  edocument in edocuments %}

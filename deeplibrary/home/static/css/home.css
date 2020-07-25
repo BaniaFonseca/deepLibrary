@@ -9,8 +9,14 @@ body, html {
   padding: 16px;
 }
 
-/* search bar*/
 
 * {
   box-sizing: border-box;
+}
+
+.bgimg-1 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("/static/imgs/home/book.jpg");
+  min-height: 100%;
 }
