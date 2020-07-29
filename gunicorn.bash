@@ -1,13 +1,13 @@
 #!/bin/bash
 
 NAME="deeplibrary"                                   # Name of the application
-DJANGODIR=/projects/deepLibrary/deeplibrary               		# Django project directory
+DJANGODIR=/projects/deepLibrary/dl               		# Django project directory
 SOCKFILE=/envs/deeplibrary/run/gunicorn.sock  # we will communicte using this unix socket
 USER=fonseca                                         # the user to run as
 GROUP=fonseca                                        # the group to run as
 NUM_WORKERS=1                                       # how many worker processes should Gunicorn spawn
-DJANGO_SETTINGS_MODULE=deeplibrary.settings      # which settings file should Django use
-DJANGO_WSGI_MODULE=deeplibrary.wsgi 
+DJANGO_SETTINGS_MODULE=dl.settings.production     # which settings file should Django use
+DJANGO_WSGI_MODULE=dl.wsgi 
 # WSGI module name
 echo "Starting $NAME as `whoami`"
 
