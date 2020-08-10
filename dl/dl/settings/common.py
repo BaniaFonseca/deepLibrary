@@ -42,6 +42,8 @@ for app_dir in Path(APPS_DIRS).glob("*"):
 
 # add apps/ to the Python path
 sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
+
+
 # ##### APPLICATION CONFIGURATION #########################
 
 # these are the apps
@@ -132,3 +134,4 @@ except IOError:
             f.write(SECRET_KEY)
     except IOError:
         raise Exception('Could not open %s for writing!' % SECRET_FILE)
+

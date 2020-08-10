@@ -28,6 +28,15 @@ DATABASES = {
     }
 }
 
+
+# #####   TEMP  CONFIGURATION ##################33
+DATABASE_NAME = 'deeplibrary'
+DATABASE_USER = 'deeplibrary'
+DATABASE_PASSWORD = 'deep'
+DATABASE_HOST = 'localhost'
+DATABASE_PORT = '27017'
+
+
 # ##### APPLICATION CONFIGURATION #########################
 
 INSTALLED_APPS = DEFAULT_APPS

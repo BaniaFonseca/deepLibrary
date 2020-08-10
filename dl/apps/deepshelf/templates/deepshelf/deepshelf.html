@@ -16,17 +16,9 @@
         <div class="w3-cell">
             <img class="w3-card-4 shelf-item-cover"  src="{% static 'imgs/deepshelf/demo.jpg' %}">
             <div class="shelf-item-description w3-light-grey w3-opacity">
-                {% if edocument.authors|length > 1 %}
                 <p class="w3-small"> 
-                    <b>{{edocument.title|upper}}.</b><br>
-                    By {{edocument.authors.0.surname|upper}} et al.
+                    <b>{{edocument.title|upper}}.</b>
                 </p>
-                {% else %}
-                <p class="w3-small w3-padding w3-light-grey w3-opacity">
-                    <b>{{edocument.title|upper}}.</b><br>
-                    By {{edocument.authors.0.surname|upper}}
-                </p>
-                {% endif %}   
             </div>
         </div>
     </div>
