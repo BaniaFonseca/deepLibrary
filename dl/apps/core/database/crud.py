@@ -1,7 +1,7 @@
-from . import crudabc
-from . connection import Connection
+from apps.core.database import crudabc
+from apps.core.database.connection import Connection
 from pymongo import MongoClient
-from .. model import ModelABC
+from apps.core.model import ModelABC
 
 class CRUD(crudabc.CRUD):
 
