@@ -1,7 +1,7 @@
 from . import crudabc
 from . connection import Connection
 from pymongo import MongoClient
-from .. model.model import ModelABC
+from .. model import ModelABC
 
 class CRUD(crudabc.CRUD):
 

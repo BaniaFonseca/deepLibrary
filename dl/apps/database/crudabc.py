@@ -1,5 +1,6 @@
 import abc
 
+
 class CRUD(abc.ABC):
 
     @abc.abstractmethod
