@@ -85,12 +85,61 @@ class Author(EmbendedModelABC):
 
 
 class Book(ElectronicDocument):
-    """ A class Model """
+    """ A Book class Model """
 
     def __init__(self):
         super().__init__()
-        self.title = None
-        
+        self.publisher = None
+        self.pages = None
+        self.preface = None
+        self.isbn = None
+        self.volume = None
+
+    @property
+    def publisher(self):
+        """The book publisher"""
+        return self.__publisher
+
+    @publisher.setter
+    def publisher(self, value):
+        self.__publisher = value
+
+    @property
+    def pages(self):
+        """The number of pages the book have"""
+        return self.__pages
+
+    @pages.setter
+    def pages(self, value):
+        self.__pages = value
+
+    @property
+    def preface(self):
+        """The book's preface"""
+        return self.__preface
+
+    @preface.setter
+    def preface(self, value):
+        self.__preface = value
+
+    @property
+    def isbn(self):
+        """The book's ISBN"""
+        return self.__isbn
+
+    @isbn.setter
+    def isbn(self, value):
+        self.__isbn = value
+
+    @property
+    def volume(self):
+        """The book's volume"""
+        return self.__volume
+
+    @isbn.setter
+    def volume(self, value):
+        self.__volume = value
+    
     @property
     def collection(self):
         return "edocument.book"
@@ -101,9 +150,89 @@ class Book(ElectronicDocument):
 
 
 class Paper(ElectronicDocument):
-    
+    """ A Paper class model"""
     def __init__(self):
         super().__init__()
+        self.keywords = None
+        self.pages = None
+        self.abstract = None
+        self.volume = None
+        self.doi = None
+        self.urls = None
+        self.publisher = None
+        self.arxivid = None 
+
+    
+    @property
+    def arxivid(self):
+        """The paper's arXiv ID"""
+        return self.__arxivid
+
+    @arxivid.setter
+    def arxividr(self, value):
+        self.__arxivid = value
+
+    @property
+    def publisher(self):
+        """The paper's publisher"""
+        return self.__publisher
+
+    @publisher.setter
+    def publisher(self, value):
+        self.__publisher = value
+
+    @property
+    def urls(self):
+        """The paper's urls """
+        return self.__urls
+
+    @urls.setter
+    def urls(self, value):
+        self.__urls = value
+
+    
+    @property
+    def doi(self):
+        """The paper's DOI """
+        return self.__doi
+
+    @doi.setter
+    def doi(self, value):
+        self.__doi = value
+
+    @property
+    def abstract(self):
+        """ The paper's abstract"""
+        return self.__abstract
+
+    @abstract.setter
+    def abstract(self, value):
+        self.__abstract = value
+
+    @property
+    def keywords(self):
+        """ The paper keywords, is a list os strings """
+        return self.__keywords
+
+    @keywords.setter
+    def keywords(self, value):
+        self.__keywords = value
+
+    @property
+    def volume(self):
+        """The book's volume"""
+        return self.__volume
+
+
+    @property
+    def pages(self):
+        """The number of pages the paper have"""
+        return self.__pages
+
+    @pages.setter
+    def pages(self, value):
+        self.__pages = value
+
 
     @property
     def collection(self):
@@ -111,9 +240,50 @@ class Paper(ElectronicDocument):
 
 
 class Monography(ElectronicDocument):
-    
+    """The  Monography class model"""
     def __init__(self):
         super().__init__()
+        self.keywords = None
+        self.pages = None
+        self.abstract = None
+        self.university = None
+        self.objective = None
+
+    @property
+    def university(self):
+        """The of the university"""
+        return self.__university
+
+    @university.setter
+    def university(self, value):
+        self.__university = value
+
+    @property
+    def pages(self):
+        """The number of pages the monography have"""
+        return self.__pages
+
+    @pages.setter
+    def pages(self, value):
+        self.__pages = value
+
+    @property
+    def abstract(self):
+        """ The monography's abstract"""
+        return self.__abstract
+
+    @abstract.setter
+    def abstract(self, value):
+        self.__abstract = value
+
+    @property
+    def keywords(self):
+        """ The monography keywords, is a list os strings """
+        return self.__keywords
+
+    @keywords.setter
+    def keywords(self, value):
+        self.__keywords = value
 
     @property
     def collection(self):
