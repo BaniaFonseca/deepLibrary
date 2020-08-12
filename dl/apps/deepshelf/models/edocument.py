@@ -2,6 +2,7 @@ import abc
 
 from apps.core.model import ModelABC, EmbendedModelABC
 
+
 class ElectronicDocument(ModelABC):
 
     def __init__(self):
@@ -55,33 +56,6 @@ class ElectronicDocument(ModelABC):
     @city.setter
     def city(self, value):
         self.__city = value
-
-
-class Author(EmbendedModelABC):
-
-    def __init__(self, name=None, description=None):
-        self.name = name
-        self.description = description
-
-    @property
-    def name(self):
-        return self.__name 
-    
-    @name.setter
-    def name(self, value):
-        self.__name = value    
-
-    @property
-    def description(self):
-        return self.__description 
-    
-    @description.setter
-    def description(self, value):
-        self.__description = value    
-
-    @property
-    def embendeddocument(self):
-        return "author"
 
 
 class Book(ElectronicDocument):
@@ -240,7 +214,7 @@ class Paper(ElectronicDocument):
 
 
 class Monography(ElectronicDocument):
-    """The  Monography class model"""
+    """A  Monography class model"""
     def __init__(self):
         super().__init__()
         self.keywords = None
@@ -288,3 +262,30 @@ class Monography(ElectronicDocument):
     @property
     def collection(self):
         return "edocument.monography"
+
+
+class Author(EmbendedModelABC):
+    """ An  Author Embended Mode"""
+    def __init__(self, name=None, description=None):
+        self.name = name
+        self.description = description
+
+    @property
+    def name(self):
+        return self.__name 
+    
+    @name.setter
+    def name(self, value):
+        self.__name = value    
+
+    @property
+    def description(self):
+        return self.__description 
+    
+    @description.setter
+    def description(self, value):
+        self.__description = value    
+
+    @property
+    def embendeddocument(self):
+        return "author"
