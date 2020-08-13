@@ -2,6 +2,19 @@ import abc
 
 class ModelABC(abc.ABC):
 
+
+    def __init__(self):
+        self.id = None
+
+    @property
+    def id(self):
+        """ The document id"""
+        return self.___id
+
+    @id.setter
+    def id(self, value):
+        self.___id = value
+
     @abc.abstractmethod
     def collection():
         """ Return the collection name assotiated with the  model """
@@ -36,6 +49,7 @@ class ModelABC(abc.ABC):
 
     def set_from_document(self, document):
         for documentkey in document.keys():
+            self.id = document['_id']
             for classproperty in self.__dict__.keys():
                 if classproperty.__contains__(documentkey):
                     self.__dict__[classproperty] = document[documentkey]
@@ -53,15 +67,26 @@ class ModelABC(abc.ABC):
                                     self.__dict__[classproperty] = embendedmodel
                                 break
                     
-    def get_as_document(self):
+    def as_document(self):
         document = {}
         for classproperty in self.__dict__.keys():
             documentkey = classproperty.split("__")
             if len(documentkey) == 2:
                 documentkey = documentkey[1]
-            document.__setitem__(documentkey, self.__dict__[classproperty])
+                if self.__dict__[classproperty] is not None:
+                    document.__setitem__(documentkey, self.__dict__[classproperty])
+                if self.embendeds is not None:
+                    for embended in self.embendeds:
+                        if documentkey.__contains__(embended().embendeddocument):
+                            if isinstance(self.__dict__[classproperty], list):
+                                document[documentkey] = document[documentkey].copy()
+                                for i, value in enumerate(self.__dict__[classproperty], 0):
+                                    document[documentkey][i] =  self.__dict__[classproperty][i].as_document()
+                            else:
+                                if self.__dict__[classproperty] is not None:
+                                    document[documentkey] =  self.__dict__[classproperty].as_document()
+                            break
         return document
-
 
 class EmbendedModelABC(abc.ABC):
     """Embended Model class    
@@ -89,11 +114,15 @@ class EmbendedModelABC(abc.ABC):
                 if classproperty.__contains__(documentkey):
                     self.__dict__[classproperty] = document[documentkey]
     
-    def get_as_document(self):
+    
+    def as_document(self):
         document = {}
         for classproperty in self.__dict__.keys():
             documentkey = classproperty.split("__")
             if len(documentkey) == 2:
                 documentkey = documentkey[1]
-            document.__setitem__(documentkey, self.__dict__[classproperty])
+                if self.__dict__[classproperty] is not None:    
+                    document.__setitem__(documentkey, self.__dict__[classproperty])
+
         return document
+

@@ -68,6 +68,26 @@ class Book(ElectronicDocument):
         self.preface = None
         self.isbn = None
         self.volume = None
+        self.edition = None
+        self.language = None
+
+    @property
+    def language(self):
+        """The book language"""
+        return self.__language
+
+    @language.setter
+    def language(self, value):
+        self.__language = value
+    
+    @property
+    def edition(self):
+        """The book edition"""
+        return self.__edition
+
+    @edition.setter
+    def edition(self, value):
+        self.__edition = value
 
     @property
     def publisher(self):
