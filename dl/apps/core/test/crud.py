@@ -11,8 +11,8 @@ class Test:
 
     def test(self, criteria=None):
         crud = CRUD()
-        # book1 = crud.get_one(edocument.Book, criteria)
-        # print(book1.as_document())
+        book1 = crud.get_one(edocument.Book, criteria)
+        print(book1.as_document())
 
         book = edocument.Book()
         book.title = "introduction to algorithms"
@@ -37,7 +37,8 @@ class Test:
 
         print("insert")
         print(book.as_document())
+        
         print("inserting ...")
-        crud.insert_one(book)
+        # crud.insert_one(book)
 
 

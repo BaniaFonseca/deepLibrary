@@ -139,7 +139,7 @@ class Book(ElectronicDocument):
         return "edocument.book"
 
     @property
-    def embendeds(self):
+    def embended_model_classes(self):
         return [Author]
 
 
