@@ -4,7 +4,7 @@ from apps.core.model import ModelABC
 
 
 class ElectronicDocument(ModelABC):
-
+    """ ElectronicDocument Class """
     def __init__(self):
         super().__init__()
         self.title = None

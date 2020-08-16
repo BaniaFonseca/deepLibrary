@@ -58,7 +58,6 @@ class ModelABC(abc.ABC):
             >>> @title.setter
             >>> def title(self, value):
             >>>     self.__title = value
-            ....
     """
 
     def __init__(self):
