@@ -1,4 +1,4 @@
-from apps.core.model import ModelABC, EmbendedModelABC
+from apps.core.model import ModelABC
 import apps.deepshelf.models.edocument as edocument
 from apps.core.database.crud import CRUD
 
@@ -18,19 +18,19 @@ class Test:
         book.title = "introduction to algorithms"
         
         authors = [
-            edocument.Author(name="cormen h. thomas", description="computer scientist"),
-            edocument.Author(name="thomas h. cormen", description="computer scientist") 
+            {'name' : 'cormen h. thomas', 'description' : 'computer scientist'},
+            {'name' : 'thomas h. cormen', 'description' : 'computer scientist'} 
         ]
 
         book.authors = authors
         book.edition = 2
         book.language = "en"
         book.pages = 750
-        book.year = 2018
+        book.year = 2020
         book.publisher = "John Wiley & Sons, Inc"
         book.isbn = "978-1-118-99687-5"
         book.preface = " ..."
-        book.volume = 2
+        book.volume = 4
         book.country = "U.S"
         book.city = "New York"
 
@@ -39,6 +39,6 @@ class Test:
         print(book.as_document())
         
         print("inserting ...")
-        # crud.insert_one(book)
+        crud.insert_one(book)
 
 

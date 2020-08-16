@@ -14,10 +14,11 @@
     {% for  edocument in edocuments %}
     <div class="w3-container w3-cell-row shelf-item">
         <div class="w3-cell">
+            {{img}}
             <img class="w3-card-4 shelf-item-cover"  src="{% static 'imgs/deepshelf/demo.jpg' %}">
             <div class="shelf-item-description w3-light-grey w3-opacity">
                 <p class="w3-small"> 
-                    <b>{{edocument.title|upper}}. ({{edocument.year}}).</b>
+                    <b>{{edocument.title|upper}} ({{edocument.year}})</b>
                 </p>
             </div>
         </div>

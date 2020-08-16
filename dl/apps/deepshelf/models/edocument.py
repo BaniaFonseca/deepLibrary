@@ -1,11 +1,12 @@
 import abc
 
-from apps.core.model import ModelABC, EmbendedModelABC
+from apps.core.model import ModelABC
 
 
 class ElectronicDocument(ModelABC):
 
     def __init__(self):
+        super().__init__()
         self.title = None
         self.year = None
         self.country = None
@@ -14,7 +15,7 @@ class ElectronicDocument(ModelABC):
 
     @property
     def authors(self):
-        """list of authors, each element on the list is an instance of the class Author"""
+        """list of authors, each element on the list is an dict"""
         return self.__authors 
     
     @authors.setter
@@ -137,10 +138,6 @@ class Book(ElectronicDocument):
     @property
     def collection(self):
         return "edocument.book"
-
-    @property
-    def embended_model_classes(self):
-        return [Author]
 
 
 class Paper(ElectronicDocument):
@@ -282,30 +279,3 @@ class Monography(ElectronicDocument):
     @property
     def collection(self):
         return "edocument.monography"
-
-
-class Author(EmbendedModelABC):
-    """ An  Author Embended Mode"""
-    def __init__(self, name=None, description=None):
-        self.name = name
-        self.description = description
-
-    @property
-    def name(self):
-        return self.__name 
-    
-    @name.setter
-    def name(self, value):
-        self.__name = value    
-
-    @property
-    def description(self):
-        return self.__description 
-    
-    @description.setter
-    def description(self, value):
-        self.__description = value    
-
-    @property
-    def embendeddocument(self):
-        return "author"
