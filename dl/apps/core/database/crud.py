@@ -4,6 +4,7 @@ from apps.core.database import crudabc
 from apps.core.database.connection import Connection
 from pymongo import MongoClient
 from apps.core.model import ModelABC
+from apps.core.exceptions import IsNotSubClassOfModelABC
 
 class CRUD(crudabc.CRUD):
 
@@ -20,29 +21,20 @@ class CRUD(crudabc.CRUD):
         self.__connection = value
     
     def get_one(self, modelclass, criteria):
-        if not issubclass(modelclass, ModelABC):
-            "must throw an exception"
-            print("The given modelclass is a a subclass of {}".format(modelclass))
-            print("But modelclass must be a subclass of {}".format(ModelABC))
-            return None
         model = modelclass()
         collection = self.connection[model.collection] 
         document = collection.find_one(criteria)
-        if document is None:
-            return None
-        else:
+        if document is not None:
             model.set_from_document(document)
             return model
-   
+        return None
+        
     def insert_one(self, model):
-        if not isinstance(model, ModelABC):
-            "must throw an exception"
-            print("The given model is an instance of {}".format(model))
-            print("But model must be an instance of {}".format(ModelABC))
-            return None
         document = model.as_document()
         if document.__contains__('_id'):
             document.pop('_id')
-        collection = self.connection[model.collection] 
-        result =  collection.insert_one(document)
-        return result.inserted_id
+        collection = self.connection[model.collection]
+        if (len(document) > 0): 
+            result = collection.insert_one(document)
+            return result.inserted_id
+        return None

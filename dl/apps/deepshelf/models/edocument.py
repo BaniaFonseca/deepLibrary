@@ -4,7 +4,7 @@ from apps.core.model import ModelABC
 
 
 class ElectronicDocument(ModelABC):
-    """ ElectronicDocument Class """
+    """Abstract Model Class ElectronicDocument  """
     def __init__(self):
         super().__init__()
         self.title = None
@@ -60,7 +60,7 @@ class ElectronicDocument(ModelABC):
 
 
 class Book(ElectronicDocument):
-    """ A Book class Model """
+    """Model Class Book"""
 
     def __init__(self):
         super().__init__()

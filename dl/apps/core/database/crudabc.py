@@ -19,13 +19,14 @@ class CRUD(abc.ABC):
             
           - `criteria` : a document especifying the query criteria ex.: ``{'year': 2015}``.
         """
+
     @abc.abstractmethod
     def insert_one(self, model):
-        """Insert the document provided by the given mode in the database 
+        """Insert the data provided by the model into the database 
         
         Return an ObjectId on success or ``None`` in failure
 
         :Parameters:
 
-          - `model`: an instance of a Model class 
+          - `model`: an object, the object must instance of a ``Model class``(ex.: Book) 
         """
