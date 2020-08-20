@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title><style>canvas{border: 1px solid #000}</style>
+    
+    </head>
+    <body>
+        <button id="prev">Prev</button>
+        <button id="next">Next</button>
+        <span id="npages">not yet</span>
+        <div>
+            <canvas id="cnv"></canvas>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.min.js"></script>
+        <script>
+            pdfDoc = null
+            canvas = document.getElementById('cnv');
+            ctx = canvas.getContext('2d');
+            scale = 1.5;
+            numPage = 1;
+    
+            var pdfjsLib = window['pdfjs-dist/build/pdf'];
+            var loadingTask = pdfjsLib.getDocument('./demo.pdf');
+            loadingTask.promise.then(function(pdf) {
+                alert('ola')
+            });
+        </script>
+    </body>
+</html>
