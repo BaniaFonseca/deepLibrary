@@ -1,15 +1,26 @@
+from django.test import TestCase
+
 from apps.core.model import ModelABC
 import apps.deepshelf.models.edocument as edocument
-from apps.core.database.crud import CRUD
+from dl.core.database.crud import CRUD
 
 
-## Warning:  crud must be tested  ....
-class Test:
+class TestCRUD(TestCase):
 
-    def __init__(self):
-        self.a = "ola"
+    def setUp(self):
+        pass
 
-    def test(self, criteria=None):
+    def test_update_one(self):
+        crud = CRUD()
+        country = "UK"
+        book = crud.get_one(edocument.Book, {'year': 2018})
+        book.country = country
+        crud.update_one(book)
+        result = crud.get_one(edocument.Book, {'year': 2018})
+        self.assertEqual(result.country, country)
+
+
+    def bla(self, criteria=None):
         crud = CRUD()
         book1 = crud.get_one(edocument.Book, criteria)
         print(book1.as_document())

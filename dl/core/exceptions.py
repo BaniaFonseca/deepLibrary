@@ -1,4 +1,4 @@
-from apps.core.model import ModelABC
+from core.model import ModelABC
 
 class IsNotSubClassOfModelABC(Exception):
    pass

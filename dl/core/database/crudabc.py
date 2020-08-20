@@ -5,9 +5,7 @@ class CRUD(abc.ABC):
 
     @abc.abstractmethod
     def get_one(self, modelclass, criteria):
-        """Get a single document from the database and Return an instance 
-        of the given Model class with its properties set with data of the matching document, 
-        or ``None`` if no matching document is found
+        """Get single model, or ``None`` if no matching document is found
 
         :Parameters:
 
@@ -22,11 +20,22 @@ class CRUD(abc.ABC):
 
     @abc.abstractmethod
     def insert_one(self, model):
-        """Insert the data provided by the model into the database 
+        """Insert single model 
         
         Return an ObjectId on success or ``None`` in failure
 
         :Parameters:
 
-          - `model`: an object, the object must instance of a ``Model class``(ex.: Book) 
+          - `model`: an object, the object must an instance of a ``Model class``(ex.: Book) 
+        """
+
+    @abc.abstractmethod
+    def update_one(self, model):
+        """Update single model    
+        
+        Return ``1`` on success or ``0`` otherwise 
+
+        :Parameters:
+
+          - `model`: an object, the object must an instance of a ``Model class``(ex.: Book) 
         """

@@ -34,16 +34,10 @@ PROJECT_TEMPLATES = [
 
 # add templates and static dir from apps
 for app_dir in Path(APPS_DIRS).glob("*"):
-    if app_dir.is_dir():
-        for template_dir in Path(app_dir).glob("templates"):
-            PROJECT_TEMPLATES.append(str(template_dir))
-        for static_dir in Path(app_dir).glob("static"):
-            STATICFILES_DIRS.append(str(static_dir))
-
-# add apps/ to the Python path
-sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
-
-
+    if app_dir.is_dir() and not app_dir.name.__contains__('__pycache__'):
+        PROJECT_TEMPLATES.append(join(app_dir, 'templates'))
+        STATICFILES_DIRS.append(join(app_dir, 'static'))
+             
 # ##### APPLICATION CONFIGURATION #########################
 
 # these are the apps

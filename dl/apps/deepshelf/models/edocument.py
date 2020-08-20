@@ -1,17 +1,26 @@
 import abc
 
-from apps.core.model import ModelABC
-
+from core.model import ModelABC
 
 class ElectronicDocument(ModelABC):
     """Abstract Model Class ElectronicDocument  """
     def __init__(self):
         super().__init__()
+        self.type = None
         self.title = None
         self.year = None
         self.country = None
         self.city = None
         self.authors = None
+
+    @property
+    def type(self):
+        """The type of edocument ex.: book"""
+        return self.__type 
+    
+    @type.setter
+    def type(self, value):
+        self.__type = value
 
     @property
     def authors(self):

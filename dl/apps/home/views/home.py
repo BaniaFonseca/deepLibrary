@@ -1,11 +1,12 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.views import View
 
-class Home(View):
+from core.view import ViewABC
+
+class Home(ViewABC):
     
     def __init__(self):
         pass
     
     def get(self, request):
-        return render(request, 'home/index.html',content_type='text/html')
+        return render(request, 'home/index.html',
+            content_type='text/html')

@@ -117,6 +117,5 @@ class ModelABC(abc.ABC):
                 if isinstance(self.__dict__[classproperty], list):
                     document.__setitem__(documentkey, self.__dict__[classproperty].copy())
                 else:
-                    document.__setitem__(documentkey, self.__dict__[classproperty])
-                
+                    document.__setitem__(documentkey, self.__dict__[classproperty])               
         return document if len(document) > 0 else None

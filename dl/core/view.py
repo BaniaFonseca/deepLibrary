@@ -2,7 +2,7 @@ import abc
 from django.http import HttpResponse
 from django.views import View
 
-from apps.core.database.crud import CRUD
+from core.database.crud import CRUD
 
 class ViewABC(View):
 

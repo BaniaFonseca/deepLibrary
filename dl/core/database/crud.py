@@ -1,10 +1,10 @@
 from bson.objectid import ObjectId
-
-from apps.core.database import crudabc
-from apps.core.database.connection import Connection
 from pymongo import MongoClient
-from apps.core.model import ModelABC
-from apps.core.exceptions import IsNotSubClassOfModelABC
+
+from core.database import crudabc
+from core.database.connection import Connection
+from core.model import ModelABC
+from core.exceptions import IsNotSubClassOfModelABC
 
 class CRUD(crudabc.CRUD):
 
@@ -38,3 +38,10 @@ class CRUD(crudabc.CRUD):
             result = collection.insert_one(document)
             return result.inserted_id
         return None
+    
+    def update_one(self, model):
+        document = model.as_document()
+        collection = self.connection[model.collection]
+        result = collection.replace_one({'_id': document['_id']}, document)
+        return result.modified_count
+        
