@@ -19,11 +19,11 @@
 <body>
   <div class="w3-top w3-bar w3-white w3-card" id="navbar">
     {% block navbar %}
-    <a href="/" class="w3-bar-item w3-button w3-bold w3-xlarge"
+    <a href="/" class="w3-bar-item w3-button w3-bold w3-xxlarge"
       style="text-shadow:1px 1px 1px #444; padding-top: 2px; padding-bottom: 2px;">
       DeepLibrary
     </a>
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-xlarge" 
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-xxlarge" 
       style="padding-top: 2px; padding-bottom: 2px;">
       <i class="fa fa-bars"></i>
     </a>
@@ -49,6 +49,7 @@
   {% block content %}
   <div class="w3-container" id="content"></div>
   {% endblock %}
+  {% block footer %}
   <footer class="w3-center w3-black w3-padding-64">
     <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
     <div class="w3-xlarge w3-section">
@@ -63,6 +64,7 @@
         class="w3-hover-text-green">w3.css</a></p>
     <p><b>Designed by Bania Fonseca</b></p>
   </footer>
+  {% endblock %}
 </body>
 
 </html>

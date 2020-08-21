@@ -1,0 +1,21 @@
+.viewer-container
+{
+    /* display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 1em;
+     */
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    
+}
+
+.navegation
+{
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 1em;
+    align-self: flex-end;
+    align-content: center;
+}
