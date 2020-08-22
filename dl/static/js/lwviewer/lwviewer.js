@@ -1,7 +1,77 @@
-// If absolute URL from the remote server is provided, configure the CORS
+// const getpage = new Promise((resolve, reject) => {
+//     $.ajax({
+//       url: 'pdfloader',
+//       data: {
+//         'edocpage'  : document.getElementById('page_num'),
+//         'edocid': 123,
+//         'edoctype'  : 'book' 
+//       },
+//       dataType: 'json',
+//       success: function (data) 
+//       {
+//         pdfData = atob(data.pdfbase64data);
+//         resolve(pdfData);
+//       },
+//       error: function(result) {
+//         reject(null);
+//     }
+//   });
+
+//     // if(condition) {    
+//     //     resolve(temp);  
+//     // } else {    
+//     //     reject('Promise is rejected');  
+//     // }
+// });
+
+// getpage.then((data) => {  
+//   alert(data);
+// });
+
+// getpage.then(function(value) {
+//   alert(value);
+// }, function(reason) {
+//   alert(reason);
+// });
+
+// function getpage(n)
+// {
+//   var pdfData
+//   $.ajax
+//   ({
+//     url: 'pdfloader',
+//     data: {
+//       'edocpage'  : n,
+//       'edocid': 123,
+//       'edoctype'  : 'book' 
+//     },
+//     dataType: 'json',
+//     success: function (data) 
+//     {
+//       pdfData = atob(data.pdfbase64data)
+//     }
+//   });
+  
+//     return pdfData;
+// }
+
+var n = 8
+
+$.ajax({
+  url: 'pdfloader',
+  data: {
+    'edocpage'  : n,
+    'edocid': 123,
+    'edoctype'  : 'book' 
+  },
+  dataType: 'json',
+  success: function (data) 
+  {
+    var pdfData = atob(data.pdfbase64data)
+    // If absolute URL from the remote server is provided, configure the CORS
 // header on that server.
 // var url = 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf';
-var url = '/static/demo.pdf'
+// var url = '/static/demo.pdf'
 // Loaded via <script> tag, create shortcut to access PDF.js exports.
 var pdfjsLib = window['pdfjs-dist/build/pdf'];
 
@@ -9,16 +79,15 @@ var pdfjsLib = window['pdfjs-dist/build/pdf'];
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
 
-
 var pdfDoc = null,
-    pageNum = 1;
+    pageNum = n;
     pageRendering = false;
     pageNumPending = null;
     scale = 1.5;
     canvas = document.getElementById('the-canvas');
     ctx = canvas.getContext('2d');
-
-
+    
+    
 /**
  * Get page info from document, resize canvas accordingly, and render page.
  * @param num Page number.
@@ -36,6 +105,7 @@ function renderPage(num) {
       canvasContext: ctx,
       viewport: viewport
     };
+    
     var renderTask = page.render(renderContext);
 
     // Wait for rendering to finish
@@ -65,6 +135,7 @@ function queueRenderPage(num) {
   }
 }
 
+// renderPage(num);
 /**
  * Displays previous page.
  */
@@ -92,36 +163,41 @@ function onNextPage() {
 /**
  * Asynchronously downloads PDF.
  */
-pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+
+pdfjsLib.getDocument({data: pdfData}).promise.then(function(pdfDoc_) {
   pdfDoc = pdfDoc_;
   document.getElementById('page_count').textContent = pdfDoc.numPages;
-
   // Initial/first page rendering
   renderPage(pageNum);
 });
 
+}});
 
 
+// pageNum = 1
+// temp(pageNum);
 
-window.onscroll = function(ev) 
-{
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) 
-    {
-        if (pageNum >= pdfDoc.numPages) 
-        {
-            return;
-        }
-        pageNum++;
-        queueRenderPage(pageNum);
-    }
+// window.onscroll = function(ev) 
+// {
+//     if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) 
+//     {
+//         // if (pageNum >= pdfDoc.numPages) 
+//         // {
+//         //     return;
+//         // }
+//         pageNum++;
+//         temp(pageNum);
+//         //queueRenderPage(pageNum);
+//     }
     
-    if ((window.scrollY) < 1) 
-    {
-        if (pageNum <= 1) 
-        {
-        return;
-        }
-        pageNum--;
-        queueRenderPage(pageNum);
-    }
-};
+//     if ((window.scrollY) < 1) 
+//     {
+//         // if (pageNum <= 1) 
+//         // {
+//         // return;
+//         // }
+//         pageNum--;
+//         temp(pageNum);
+//         // queueRenderPage(pageNum);
+//     }
+// };

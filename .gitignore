@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-pdf.js
+*.pdf
 .Python
 .vscode
 /static/

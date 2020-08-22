@@ -1,7 +1,10 @@
 from django.urls import path, re_path
 
-from apps.lwviewer.views.lwviewer import LightWeightViewer
+from apps.lwviewer.views.lwviewer import (
+                                            LightWeightViewer,
+                                            LightWeightPDFLoader)
 
 lwviewerpatterns = [
-    re_path(r'^', LightWeightViewer.as_view())
+    path('', LightWeightViewer.as_view()),
+    path('pdfloader', LightWeightPDFLoader.as_view())
 ]
