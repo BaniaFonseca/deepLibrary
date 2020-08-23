@@ -2,7 +2,7 @@
 from os.path import abspath, basename, dirname, join, normpath
 from pathlib import Path
 import sys
-import django_heroku
+# import django_heroku
 
 # ##### PATH CONFIGURATION ################################
 
@@ -129,5 +129,5 @@ except IOError:
     except IOError:
         raise Exception('Could not open %s for writing!' % SECRET_FILE)
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+# # Activate Django-Heroku.
+# django_heroku.settings(locals())
