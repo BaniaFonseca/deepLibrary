@@ -11,7 +11,7 @@ DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 
 # fetch the project_root
 PROJECT_ROOT = dirname(DJANGO_ROOT)
-
+BASE_DIR = PROJECT_ROOT
 # the name of the whole site
 SITE_NAME = basename(DJANGO_ROOT)
 
