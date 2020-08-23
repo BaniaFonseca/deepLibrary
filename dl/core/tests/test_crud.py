@@ -1,8 +1,8 @@
 from django.test import TestCase
 
-from apps.core.model import ModelABC
+from core.model import ModelABC
 import apps.deepshelf.models.edocument as edocument
-from dl.core.database.crud import CRUD
+from core.database.crud import CRUD
 
 
 class TestCRUD(TestCase):
@@ -20,10 +20,10 @@ class TestCRUD(TestCase):
         self.assertEqual(result.country, country)
 
 
-    def bla(self, criteria=None):
+    def insert(self):
         crud = CRUD()
-        book1 = crud.get_one(edocument.Book, criteria)
-        print(book1.as_document())
+        # book1 = crud.get_one(edocument.Book, criteria)
+        # print(book1.as_document())
 
         book = edocument.Book()
         book.title = "introduction to algorithms"
