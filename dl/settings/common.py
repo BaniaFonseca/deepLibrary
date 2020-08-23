@@ -132,4 +132,4 @@ SECRET_KEY = 'abcdefghijklmnopqrstuvwxyz0123456789!$%&()=+-_'
 #         raise Exception('Could not open %s for writing!' % SECRET_FILE)
 
 # # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
