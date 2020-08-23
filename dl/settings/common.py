@@ -117,17 +117,19 @@ MEDIA_URL = '/media/'
 DEBUG = False
 
 # finally grab the SECRET KEY
-try:
-    SECRET_KEY = open(SECRET_FILE).read().strip()
-except IOError:
-    try:
-        from django.utils.crypto import get_random_string
-        chars = 'abcdefghijklmnopqrstuvwxyz0123456789!$%&()=+-_'
-        SECRET_KEY = get_random_string(50, chars)
-        with open(SECRET_FILE, 'w') as f:
-            f.write(SECRET_KEY)
-    except IOError:
-        raise Exception('Could not open %s for writing!' % SECRET_FILE)
+SECRET_KEY = 'abcdefghijklmnopqrstuvwxyz0123456789!$%&()=+-_'
+
+# try:
+#     SECRET_KEY = open(SECRET_FILE).read().strip()
+# except IOError:
+#     try:
+#         from django.utils.crypto import get_random_string
+#         chars = 'abcdefghijklmnopqrstuvwxyz0123456789!$%&()=+-_'
+#         SECRET_KEY = get_random_string(50, chars)
+#         with open(SECRET_FILE, 'w') as f:
+#             f.write(SECRET_KEY)
+#     except IOError:
+#         raise Exception('Could not open %s for writing!' % SECRET_FILE)
 
 # # Activate Django-Heroku.
 django_heroku.settings(locals())
