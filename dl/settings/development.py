@@ -22,12 +22,9 @@ LOGOUT_REDIRECT_URL = 'core_login'
 
 # ##### DATABASE CONFIGURATION ############################
 DATABASES = {
-        'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'deeplibrary',
-        'HOST': 'mongodb+srv://deeplibrary:deep@deeplibrary.9ud8i.gcp.mongodb.net/deeplibrary?retryWrites=true&w=majority',
-        'USER': 'deeplibrary',
-        'PASSWORD': 'deep',
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': join(PROJECT_ROOT, 'run', 'dev.sqlite3'),
     }
 }
 

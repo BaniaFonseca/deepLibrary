@@ -16,6 +16,6 @@ class Connection:
             DATABASE_HOST, 
             DATABASE_PORT, 
             DATABASE_USER)
-        url = 'mongodb+srv://deeplibrary:deep@deeplibrary.9ud8i.gcp.mongodb.net/deeplibrary?retryWrites=true&w=majority' 
+        # url = 'mongodb+srv://deeplibrary:deep@deeplibrary.9ud8i.gcp.mongodb.net/deeplibrary?retryWrites=true&w=majority' 
         connection = MongoClient(url) 
         return connection[DATABASE_NAME]         

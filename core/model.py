@@ -61,15 +61,15 @@ class ModelABC(abc.ABC):
     """
 
     def __init__(self):
-        self._id = None
+        self.id = None
 
     @property
-    def _id(self):
+    def id(self):
         """ The id of the document represented by the model"""
         return self.___id
 
-    @_id.setter
-    def _id(self, value):
+    @id.setter
+    def id(self, value):
         self.___id = value
 
     @abc.abstractmethod
