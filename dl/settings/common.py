@@ -2,6 +2,8 @@
 from os.path import abspath, basename, dirname, join, normpath
 from pathlib import Path
 import sys
+import os
+import django_heroku
 
 # ##### PATH CONFIGURATION ################################
 
@@ -131,3 +133,12 @@ except IOError:
             f.write(SECRET_KEY)
     except IOError:
         raise Exception('Could not open %s for writing!' % SECRET_FILE)
+
+    
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+BASE_DIR = PROJECT_ROOT
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+django_heroku.settings(locals())
