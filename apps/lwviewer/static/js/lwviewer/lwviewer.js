@@ -314,7 +314,7 @@ function temp2(n)
   // var url = 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf';
   // var url = 'http://localhost:9000/edocuments/cl.pdf'; 
 
-  var url = '/lwviewer/pdfloader?'+'id='+$("#id").data('value')+'&type='+$("#type").data('value')+'&page='+n 
+  var url = '/lwviewer/'+$("#type").data('value')+'/'+$("#id").data('value')+'/'+'/'+n 
   
   // {data: pdfData}
   pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {

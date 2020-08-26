@@ -1,10 +1,8 @@
 from django.urls import path, re_path
 
-from apps.lwviewer.views.lwviewer import (
-                                            LightWeightViewer,
-                                            LightWeightPDFLoader)
+from apps.lwviewer.views.lwviewer import  LightWeightViewer
 
 lwviewerpatterns = [
-    path('', LightWeightViewer.as_view()),
-    path('pdfloader', LightWeightPDFLoader.as_view())
+    path('<type>/<edocid>/<pages>/', LightWeightViewer.as_view()),
+    path('<type>/<pageid>/', LightWeightViewer.as_view())
 ]
