@@ -1,6 +1,6 @@
 # Python imports
 from os.path import join
-import django_heroku
+# import django_heroku
 
 # project imports
 from .common import *
@@ -49,4 +49,5 @@ INSTALLED_APPS = DEFAULT_APPS
 BASE_DIR = PROJECT_ROOT
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
-django_heroku.settings(locals())
+
+# django_heroku.settings(locals())
