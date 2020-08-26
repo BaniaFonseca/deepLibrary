@@ -46,8 +46,8 @@ INSTALLED_APPS = DEFAULT_APPS
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-BASE_DIR = PROJECT_ROOT
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = "/static/"
+# BASE_DIR = PROJECT_ROOT
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_URL = "/static/"
 
 # django_heroku.settings(locals())
