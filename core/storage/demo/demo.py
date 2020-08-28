@@ -17,6 +17,7 @@ def get_page(id):
         pdfbinarydata = io.BytesIO()
         pdw.write(pdfbinarydata)
         pdfbinarydata.seek(0)
+        
         return pdfbinarydata.read()
             
 
