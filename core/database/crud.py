@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 from core.database import crudabc
 from core.database.connection import Connection
-from core.model import ModelABC
+from core.database.model import ModelABC
 from core.exceptions import IsNotSubClassOfModelABC
 
 class CRUD(crudabc.CRUD):
@@ -28,7 +28,11 @@ class CRUD(crudabc.CRUD):
             model.set_from_document(document)
             return model
         return None
-        
+
+    def get_document(self, collectionname ,criteria):
+        collection = self.connection[collectionname] 
+        return collection.find_one(criteria)
+         
     def insert_one(self, model):
         document = model.as_document()
         if document.__contains__('_id'):

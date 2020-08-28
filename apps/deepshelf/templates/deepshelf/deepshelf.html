@@ -30,7 +30,7 @@
     <div class="w3-container w3-cell-row shelf-item">
         
         <div class="w3-cell">
-            <a href="/lwviewer/{{edocument.type}}/{{edocument.id}}/{{edocument.pages}}" 
+            <a href="{% url 'viewer' edocument.collection edocument.id %}" 
                     style="text-decoration: none;">
                 <img class="w3-card-4 shelf-item-cover"  src="{% static 'deepshelf/imgs/demo.jpg' %}">
             

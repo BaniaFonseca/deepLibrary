@@ -22,13 +22,12 @@ LOGOUT_REDIRECT_URL = 'core_login'
 
 
 # ##### DATABASE CONFIGURATION ############################
-DATABASES = {}
-# {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': join(PROJECT_ROOT, 'run', 'dev.sqlite3'),
-#     }
-# }
+DATABASES ={
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': join(PROJECT_ROOT, 'run', 'dev.sqlite3'),
+    }
+}
 
 
 # #####   TEMP  CONFIGURATION ##################33

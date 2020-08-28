@@ -25,21 +25,3 @@ class OSCRUD(crudabc.OSCRUD):
             data,
             length,
             contenttype)
-
-# filename = dirname(abspath(__file__))
-#             with open(join(filename,'pdf/demo.pdf'), 'rb') as pdf:
-#                 pdfr = PyPDF2.PdfFileReader(pdf) 
-#                 npages = pdfr.numPages
-#                 for j in range(npages):
-#                     page = pdfr.getPage(j)
-#                     pdw = PyPDF2.PdfFileWriter()
-#                     pdw.addPage(page)
-#                     pdfbinarydata = io.BytesIO()
-#                     pdw.write(pdfbinarydata)
-#                     nbytes = pdfbinarydata.tell()
-#                     pdfbinarydata.seek(0)
-#                     self.oscrud.save_object(
-#                         type, id+str(j+1), 
-#                         pdfbinarydata, 
-#                         nbytes,
-#                         contenttype='application/pdf')

@@ -1,0 +1,145 @@
+
+var page =  parseInt(document.getElementById("page").innerHTML)
+var pages = parseInt(document.getElementById("pages").innerHTML)
+
+function renderPage(page)
+{
+  var pdfjsLib = window['pdfjs-dist/build/pdf'];
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+  
+  var pdfDoc = null,
+      pageNum = page;
+      pageRendering = false;
+      pageNumPending = null;
+      scale = 1.5;
+      canvas = document.getElementById('the-canvas');
+      ctx = canvas.getContext('2d');
+      
+      
+  /**
+   * Get page info from document, resize canvas accordingly, and render page.
+   * @param num Page number.
+   */
+  function renderPage(num) {
+    pageRendering = true;
+    // Using promise to fetch the page
+    pdfDoc.getPage(num).then(function(page) {
+      var viewport = page.getViewport({scale: scale});
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+      
+      // canvas.height = window.innerHeight
+      // canvas.width = window.innerWidth
+  
+      // Render PDF page into canvas context
+      var renderContext = {
+        canvasContext: ctx,
+        viewport: viewport
+      };
+      
+      var renderTask = page.render(renderContext);
+  
+      // Wait for rendering to finish
+      renderTask.promise.then(function() {
+        pageRendering = false;
+        if (pageNumPending !== null) {
+          // New page rendering is pending
+          renderPage(pageNumPending);
+          pageNumPending = null;
+        }
+      });
+    });
+  
+    // Update page counters
+    document.getElementById('page').textContent = page;
+  }
+  
+  /**
+   * If another page rendering in progress, waits until the rendering is
+   * finised. Otherwise, executes rendering immediately.
+   */
+  function queueRenderPage(num) {
+    if (pageRendering) {
+      pageNumPending = num;
+    } else {
+      renderPage(num);
+    }
+  }
+  
+  // document.getElementById('next').addEventListener('click', onNextPage);
+  
+  /**
+   * Asynchronously downloads PDF.
+   */
+  
+  // pdfjsLib.getDocument({data: pdfData}).promise.then(function(pdfDoc_) {
+  
+  // var url = 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf';
+  // var url = 'http://localhost:9000/edocuments/cl.pdf'; 
+
+  var url = ''+page
+  
+  // {data: pdfData}
+  pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+    pdfDoc = pdfDoc_;
+    // document.getElementById('page_count').textContent = pdfDoc.numPages;
+    // Initial/first page rendering
+    renderPage(1);
+    // renderPage(pageNum);
+  });
+}
+
+renderPage(page)
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+        // up arrow
+    }
+    else if (e.keyCode == '40') {
+        // down arrow
+    }
+    else if (e.keyCode == '37') {
+       if (page > 1){
+          page = page - 1
+          document.getElementById("page").textContent = page
+          renderPage(page)
+       }
+
+    }
+    else if (e.keyCode == '39') {
+      if (page < pages){
+        page = page + 1
+        document.getElementById("page").textContent = page
+        renderPage(page) 
+      } 
+    }
+}
+
+ // renderPage(num);
+  /**
+   * Displays previous page.
+   */
+  function prev() {
+    if (page > 1){
+      page = page - 1
+      document.getElementById("page").textContent = page
+      renderPage(page)
+   }
+  }
+  // document.getElementById('prev').addEventListener('click', onPrevPage);
+  
+  /**
+   * Displays next page.
+   */
+  function next() {
+    if (page < pages){
+      page = page + 1
+      document.getElementById("page").textContent = page
+      renderPage(page) 
+    }
+  }

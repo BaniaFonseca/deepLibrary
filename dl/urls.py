@@ -10,5 +10,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^', include(homepatterns)),
     re_path('deepshelf/', include(deepshelfpatterns)),
-    re_path('lwviewer/', include(lwviewerpatterns))
+    re_path('read/', include(lwviewerpatterns)),
 ]

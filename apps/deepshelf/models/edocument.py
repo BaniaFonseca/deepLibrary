@@ -1,6 +1,6 @@
 import abc
 
-from core.model import ModelABC
+from core.database.model import ModelABC
 
 class ElectronicDocument(ModelABC):
     """Abstract Model Class ElectronicDocument  """
@@ -146,7 +146,7 @@ class Book(ElectronicDocument):
     
     @property
     def collection(self):
-        return "edocument.book"
+        return "books"
 
 
 class Paper(ElectronicDocument):
@@ -236,7 +236,7 @@ class Paper(ElectronicDocument):
 
     @property
     def collection(self):
-        return "edocument.paper"
+        return "papers"
 
 
 class Monography(ElectronicDocument):
@@ -287,4 +287,4 @@ class Monography(ElectronicDocument):
 
     @property
     def collection(self):
-        return "edocument.monography"
+        return "monographys"
