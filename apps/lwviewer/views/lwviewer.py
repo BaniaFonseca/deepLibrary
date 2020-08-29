@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.http import HttpResponse, Http404
 
 from core.view import ViewABC
-from core.storage.crud import OSCRUD
+from core.storage.oscrud import OSCRUD
 from apps.deepshelf.models.edocument import Book
 
 #just for development

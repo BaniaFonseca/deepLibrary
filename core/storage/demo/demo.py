@@ -2,7 +2,7 @@ import PyPDF2
 import io
 from os.path import abspath, dirname, join
 
-from core.storage.crud import OSCRUD
+from core.storage.oscrud import OSCRUD
 
 oscrud = OSCRUD()
 
