@@ -1,0 +1,121 @@
+#%RAML 1.0
+title: DeepLibrary API
+baseUri: http://api.deeplibrary.io/{version}
+version: v1
+protocols: [HTTP, HTTPS]
+types:
+  Message:
+    properties:
+      message:
+        type: string
+        required: true
+  Page:
+    properties:
+      pageNumber:
+        type: integer
+        required: true
+      base64EncodedPageContent:
+        type: string
+        required: true
+  Edocument:
+    properties:
+      numberOfpages:
+        type: integer
+        required: true
+      title:
+        type: string
+        required: true
+      year:
+        type: integer
+        required: true
+      country:
+        type: string
+        required: true
+      city:
+        type: string
+        required: true
+      authors:
+        type: string[]
+        required: true
+  Book:
+    type: Edocument
+    properties:
+      isbn:
+        type: string
+        required: true
+      publisher:
+        type: string
+        required: true
+      preface:
+        type: string
+        required: true
+      volume:
+        type: integer
+        required: true
+      edition:
+          type: integer
+          required: true
+      language:
+        type: string
+        required: true
+/books:
+  description: Collection of available books
+  /{bookId}:
+    description: Book entity
+    get:
+      description: Get Details Of The Book With 'id = {bookId}'
+      responses:
+        200:
+          body:
+            application/json:
+              type: Book
+              properties:
+                id:
+                  type: string
+                  required: true
+              example:
+                id: "5f390b30ea0e67ac51555b32"
+                isbn: "978-1-118-99687-5"
+                title: "introduction to algorithms"
+                numberOfpages: 750
+                year: 2015
+                publisher: "John Wiley & Sons, Inc"
+                preface: ""
+                volume: 1
+                edition: 3
+                language: "english"
+                country: "US"
+                city: "New York"
+                authors: ["cormen h. thomas"]
+    /pages:
+      description: Collection Of Pages Of The Book With 'id = {bookId}'
+      post:
+        description: Add new Page to the Book With 'id = {bookId}
+        queryParameters:
+          access_token:
+            description: "The access token provided by authentication application"
+            example: ABCDE
+            required: true
+            type: string
+        body:
+          application/json:
+            type: Page
+            example:
+              pageNumber: 1
+              base64EncodedPageContent: "WYIWTYTQUY..."
+        responses:
+          200:
+            body:
+              application/json:
+                type: Message
+                example:
+                  message: "The page has been succefully added"
+      /{pageNumber}:
+        description: The Page to be streamed to the client
+        get:
+          description: Get The Content Of The Page With 'number = {pageNumber}'
+          responses:
+            200:
+              body:
+                application/pdf:
+                  example: !include 5f390b30ea0e67ac51555b321.pdf
