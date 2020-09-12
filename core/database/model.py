@@ -93,7 +93,7 @@ class ModelABC(abc.ABC):
         """ Return the the model as a document or ```None``
         if the model properties are not setted yet
         """
-        document = {"collection" : self.collection()}
+        document = {"collection" : self.collection}
         for classproperty in self.__dict__.keys():
             documentkey = classproperty.split("__")
             documentkey = documentkey[1]
