@@ -16,18 +16,11 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # adjust the minimal login
-LOGIN_URL = 'core_login'
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = 'core_login'
+LOGOUT_REDIRECT_URL = '/'
 
 
-# ##### DATABASE CONFIGURATION ############################
-DATABASES ={
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(PROJECT_ROOT, 'run', 'dev.sqlite3'),
-    }
-}
 
 
 # #####   TEMP  CONFIGURATION ##################33
@@ -36,6 +29,18 @@ DATABASE_USER = 'deeplibrary'
 DATABASE_PASSWORD = 'deep'
 DATABASE_HOST = 'localhost'
 DATABASE_PORT = '27017'
+
+# ##### DATABASE CONFIGURATION ############################
+DATABASES ={
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': DATABASE_USER,
+        'NAME': DATABASE_NAME,
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': DATABASE_HOST,
+        'PORT': '5432'
+    }
+}
 
 
 # ##### APPLICATION CONFIGURATION #########################

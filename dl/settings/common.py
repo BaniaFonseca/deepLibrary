@@ -31,6 +31,12 @@ PROJECT_TEMPLATES = [
     join(PROJECT_ROOT, 'templates')
 ]
 
+DATABASE_NAME = 'deeplibrary'
+DATABASE_USER = 'deeplibrary'
+DATABASE_PASSWORD = 'deep'
+DATABASE_HOST = 'localhost'
+DATABASE_PORT = '27017'
+
 # add templates and static dir from apps
 for app_dir in Path(APPS_DIRS).glob("*"):
     if app_dir.is_dir() and not app_dir.name.__contains__('__pycache__'):
@@ -48,8 +54,10 @@ DEFAULT_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'apps.lwviewer',
-    'apps.deepshelf'
+    'apps.deepshelf',
+    'apps.accounts'
 ]
 
 # Middlewares
@@ -64,6 +72,12 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
 # template stuff
 TEMPLATES = [
     {
@@ -74,11 +88,12 @@ TEMPLATES = [
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
+                'django.template.context_processors.request',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
-                'django.contrib.messages.context_processors.messages'
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
@@ -114,7 +129,6 @@ STATIC_URL = '/static/'
 
 # the URL for media files
 MEDIA_URL = '/media/'
-
 
 # ##### DEBUG CONFIGURATION ###############################
 DEBUG = False
