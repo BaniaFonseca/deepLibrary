@@ -122,7 +122,7 @@ class AbstractModel(abc.ABC):
         del json['_id']
         return json
 
-def get_model(collection):
+def find_model(collection):
     "Return Model based on collection name"
     if AbstractModel.subclasses.__contains__(collection) is True:
         return AbstractModel.subclasses[collection]
