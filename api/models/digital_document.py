@@ -1,9 +1,7 @@
-import abc
+from models.base import AbstractModel
 
-from core.database.model import ModelABC
-
-class ElectronicDocument(ModelABC):
-    """Abstract Model Class ElectronicDocument  """
+class AbstractDigitalDocument(AbstractModel, is_abstract=True):
+    """Abstract Model Class AbstractDigitalDocument  """
     def __init__(self):
         super().__init__()
         self.type = None
@@ -68,7 +66,7 @@ class ElectronicDocument(ModelABC):
         self.__city = value
 
 
-class Book(ElectronicDocument):
+class Book(AbstractDigitalDocument):
     """Model Class Book"""
 
     def __init__(self):
@@ -149,7 +147,7 @@ class Book(ElectronicDocument):
         return "books"
 
 
-class Paper(ElectronicDocument):
+class Paper(AbstractDigitalDocument):
     """ A Paper class model"""
     def __init__(self):
         super().__init__()
@@ -169,7 +167,7 @@ class Paper(ElectronicDocument):
         return self.__arxivid
 
     @arxivid.setter
-    def arxividr(self, value):
+    def arxivid(self, value):
         self.__arxivid = value
 
     @property
@@ -220,9 +218,13 @@ class Paper(ElectronicDocument):
 
     @property
     def volume(self):
-        """The book's volume"""
+        """The  volume"""
         return self.__volume
 
+    @volume.setter
+    def volume(self, value):
+        """The book's volume"""
+        self.__volume = value
 
     @property
     def pages(self):
@@ -239,7 +241,7 @@ class Paper(ElectronicDocument):
         return "papers"
 
 
-class Monography(ElectronicDocument):
+class Monography(AbstractDigitalDocument):
     """A  Monography class model"""
     def __init__(self):
         super().__init__()
@@ -288,3 +290,4 @@ class Monography(ElectronicDocument):
     @property
     def collection(self):
         return "monographys"
+

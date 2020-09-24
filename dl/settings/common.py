@@ -146,3 +146,5 @@ except IOError:
             f.write(SECRET_KEY)
     except IOError:
         raise Exception('Could not open %s for writing!' % SECRET_FILE)
+
+AUTH_USER_MODEL = 'accounts.User'

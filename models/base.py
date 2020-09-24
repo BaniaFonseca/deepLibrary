@@ -1,6 +1,7 @@
-import abc
+import abc 
 
-class ModelABC(abc.ABC):
+
+class AbstractModel(abc.ABC):    
     """Abstract Model Class 
 
         Every model must follow the guide rules bellow.
@@ -59,6 +60,12 @@ class ModelABC(abc.ABC):
             >>> def title(self, value):
             >>>     self.__title = value
     """
+    subclasses = {}
+
+    def __init_subclass__(cls, is_abstract=False, **kwargs):
+        super().__init_subclass__(**kwargs)
+        if not is_abstract:
+            cls.subclasses[cls().collection] = cls()
 
     def __init__(self):
         self.id = None
@@ -73,11 +80,12 @@ class ModelABC(abc.ABC):
         self.___id = value
 
     @abc.abstractmethod
-    def collection():
+    def collection(self):
         """Return the collection's name to which the document 
         represented by the model belong to
         """
-    
+        pass
+
     def set_from_document(self, document):
         """Set model's properties with data from given document"""
         for documentkey in document.keys():
@@ -113,3 +121,10 @@ class ModelABC(abc.ABC):
         json.__setitem__('id',  str(json['_id']))
         del json['_id']
         return json
+
+def get_model(collection):
+    "Return Model based on collection name"
+    if AbstractModel.subclasses.__contains__(collection) is True:
+        return AbstractModel.subclasses[collection]
+    else:
+        return None
