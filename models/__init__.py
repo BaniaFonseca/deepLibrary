@@ -2,4 +2,4 @@
     Register Models Objects
 """
 
-from api.models.digital_document import *
+from api.models.digital_documents import *

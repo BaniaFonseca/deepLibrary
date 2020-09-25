@@ -82,24 +82,29 @@ class AbstractModel(abc.ABC):
     @abc.abstractmethod
     def collection(self):
         """Return the collection's name to which the document 
-        represented by the model belong to
+            represented by the model belong to
         """
         pass
 
     def set_from_document(self, document):
         """Set model's properties with data from given document"""
         for documentkey in document.keys():
-            for classproperty in self.__dict__.keys():
-                if classproperty.__contains__(documentkey):
-                    if isinstance(document[documentkey], list):
-                        self.__dict__[classproperty] = document[documentkey].copy()
-                    else:
-                        self.__dict__[classproperty] = document[documentkey]
-                    
+            value = document[documentkey]
+            if isinstance(value, list):
+                self.set_property(documentkey, value.copy())
+            else:
+                self.set_property(documentkey, value)
 
-    def as_document(self):
+                    
+    def set_property(self, property_name, value):
+        for class_property in self.__dict__.keys():
+            if class_property.__contains__(property_name):
+                self.__dict__[class_property] = value
+                break
+
+    def to_document(self):
         """ Return the the model as a document or ```None``
-        if the model properties are not setted yet
+            if the model properties are not setted yet
         """
         document = {"collection" : self.collection}
         for classproperty in self.__dict__.keys():
@@ -107,9 +112,9 @@ class AbstractModel(abc.ABC):
             documentkey = documentkey[1]
             if self.__dict__[classproperty] is not None:
                 if isinstance(self.__dict__[classproperty], list):
-                    document.__setitem__(documentkey, self.__dict__[classproperty].copy())
+                    document[documentkey] = self.__dict__[classproperty].copy()
                 else:
-                    document.__setitem__(documentkey, self.__dict__[classproperty])               
+                    document[documentkey] = self.__dict__[classproperty]               
         
         if len(document) > 0:
             return document
@@ -117,14 +122,17 @@ class AbstractModel(abc.ABC):
             return None    
 
     def to_json(self):
-        json = self.as_document()
-        json.__setitem__('id',  str(json['_id']))
-        del json['_id']
-        return json
+        if len(self.to_document() > 0):
+            json = self.to_document()
+            json['id'] = json.pop('_id')
+            return json
+        else:
+            return None
 
 def find_model(collection):
-    "Return Model based on collection name"
-    if AbstractModel.subclasses.__contains__(collection) is True:
-        return AbstractModel.subclasses[collection]
-    else:
-        return None
+    """Return Model based on collection name"""
+    for key in AbstractModel.subclasses.keys():
+        if key == collection:
+            return AbstractModel.subclasses[collection]
+    
+    return None

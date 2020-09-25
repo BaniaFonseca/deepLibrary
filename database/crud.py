@@ -1,12 +1,11 @@
 from bson.objectid import ObjectId
 from pymongo import MongoClient
 
-from core.database import crudabc
-from core.database.connection import Connection
-from core.database.model import ModelABC
-from core.exceptions import IsNotSubClassOfModelABC
+from database.crudabc import AbstractCRUD
+from database.connection import Connection
+from models import base
 
-class CRUD(crudabc.CRUD):
+class CRUD(AbstractCRUD):
 
     def __init__(self):
         super().__init__()
@@ -20,32 +19,30 @@ class CRUD(crudabc.CRUD):
     def connection(self, value):
         self.__connection = value
     
-    def get_one(self, modelclass, criteria):
-        model = modelclass()
-        collection = self.connection[model.collection] 
-        document = collection.find_one(criteria)
-        if document is not None:
-            model.set_from_document(document)
-            return model
+    def get_one(self, collection, criteria):
+        model = base.find_model(collection)
+        if model is not None:
+            db_collection = self.connection[model.collection] 
+            document = collection.find_one(criteria)
+            if document is not None:
+                model.set_from_document(document)
+                return model
         return None
-
-    def get_document(self, collectionname ,criteria):
-        collection = self.connection[collectionname] 
-        return collection.find_one(criteria)
-         
+     
     def insert_one(self, model):
-        document = model.as_document()
-        if document.__contains__('_id'):
-            document.pop('_id')
-        collection = self.connection[model.collection]
-        if (len(document) > 0): 
+        document = model.to_document()
+        if (len(document) > 0):
+            if document.__contains__('_id'):
+                document.pop('_id')
+            collection = self.connection[model.collection]
             result = collection.insert_one(document)
             return result.inserted_id
         return None
     
     def update_one(self, model):
         document = model.as_document()
-        collection = self.connection[model.collection]
-        result = collection.replace_one({'_id': document['_id']}, document)
-        return result.modified_count
-        
+        if (len(document) > 0):
+            collection = self.connection[model.collection]
+            result = collection.replace_one({'_id': document['_id']}, document)
+            return result.modified_count
+        return None
