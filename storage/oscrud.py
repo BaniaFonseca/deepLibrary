@@ -1,7 +1,7 @@
-from core.storage import oscrudabc
-from core.storage.connection import Connection
+from storage import oscrudabc
+from storage.connection import Connection
 
-class OSCRUD(oscrudabc.OSCRUD):
+class OSCRUD(oscrudabc.AbstractCRUD):
     """ Object Storage CRUD Class"""
     def __init__(self):
         super().__init__()

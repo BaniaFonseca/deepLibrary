@@ -4,7 +4,7 @@ from apps.lwviewer.views.lwviewer import(
     LightWeightViewer,
     PDFLoader)
 
-lwviewerpatterns = [
+urlpatterns = [
     path('<collection>/<id>/', LightWeightViewer.as_view(), name='viewer'),
     path('<collection>/<id>/<int:page>/', PDFLoader.as_view(), name='pdfloader')
 ]

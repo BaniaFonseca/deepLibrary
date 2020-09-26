@@ -7,7 +7,7 @@ class AbstractModel(abc.ABC):
         Every model must follow the guide rules bellow.
         If they do not, well, do not google, if errors pops up:
 
-        1. It must inherite from ``ModelABC`` and implement 
+        1. It must inherite from ``AbstractModel`` and implement 
         its defined abstractmethods
 
         2. It must precede the name of its properties with double underscore 
@@ -19,13 +19,13 @@ class AbstractModel(abc.ABC):
         of the the same name (ignoring the double underscore) decorated 
         with  ``@property`` 
             ex.:
-            >>> @property # is the getter function for the property self.___id
-            >>> def _id(self):
-            >>>     return self.___id
+            >>> @property # is the getter function for the property self.__title
+            >>> def title(self):
+            >>>     return self.__title
 
-            >>> @_id.setter # is the setter function for property self.___id
-            >>> def _id(self, value):
-            >>>     self.___id = value
+            >>> @_id.setter # is the setter function for property self.__title
+            >>> def title(self, value):
+            >>>     self.___title = value
         
         4. It must ensure that the name of its properties (ignoring the double underscore)
         match the fields defined on the database schema.
@@ -60,6 +60,7 @@ class AbstractModel(abc.ABC):
             >>> def title(self, value):
             >>>     self.__title = value
     """
+    
     subclasses = {}
 
     def __init_subclass__(cls, is_abstract=False, **kwargs):

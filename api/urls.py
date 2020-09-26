@@ -1,10 +1,10 @@
 from django.urls import path, re_path
 
 from rest_framework.authtoken.views import obtain_auth_token
-from core.api.views import edocuments as edocs
+from api.views import digital_documents_endpoints as dde
 
-apiurlpatterns = [
-    path('books/<bookid>/pages/<int:pagenumber>/', edocs.BookPage.as_view(), name='book_page'),
-    path('books/<bookid>', edocs.BookView.as_view(), name='book'),
+urlpatterns = [
+    path('books/<bookid>/pages/<int:pagenumber>/', dde.BookPage.as_view(), name='book_page'),
+    path('books/<bookid>', dde.BookView.as_view(), name='book'),
     path('api-token-auth', obtain_auth_token, name='api-token-auth'),
 ]

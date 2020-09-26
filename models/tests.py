@@ -1,7 +1,7 @@
-from django.test import TestCase
+from unittest import TestCase
 
-from model import base
-import api.models.digital_documents as ddoc
+from models import base
+from api.models.digital_documents import *
 
 
 class TestBase(TestCase):
@@ -9,8 +9,13 @@ class TestBase(TestCase):
     def setUp(self):
         pass
 
-    def test_find_model(self):
-        pass
+    def test_find_model_1(self):
+        model = base.find_model('books')
+        self.assertIsNotNone(model)
+
+    def test_find_model_2(self):
+        model = base.find_model('foo')
+        self.assertIsNone(model)
 
     def test_to_json(self):
         pass

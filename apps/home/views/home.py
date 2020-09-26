@@ -1,8 +1,8 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from django.views import View
 
-from core.view import ViewABC
-
-class Home(ViewABC):
+class Home(View):
     
     def __init__(self):
         pass

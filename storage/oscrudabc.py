@@ -1,6 +1,6 @@
 import abc
 
-class OSCRUD(abc.ABC):
+class AbstractCRUD(abc.ABC):
   """ Object Storage CRUD Abstract Class"""
   @abc.abstractmethod
   def get_object(self, bucketname, objectname):

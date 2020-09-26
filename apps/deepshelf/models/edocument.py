@@ -1,8 +1,8 @@
 import abc
 
-from core.database.model import ModelABC
+from models.base import AbstractModel
 
-class ElectronicDocument(ModelABC):
+class ElectronicDocument(AbstractModel):
     """Abstract Model Class ElectronicDocument  """
     def __init__(self):
         super().__init__()
@@ -169,7 +169,7 @@ class Paper(ElectronicDocument):
         return self.__arxivid
 
     @arxivid.setter
-    def arxividr(self, value):
+    def arxivid(self, value):
         self.__arxivid = value
 
     @property
@@ -223,6 +223,10 @@ class Paper(ElectronicDocument):
         """The book's volume"""
         return self.__volume
 
+    @volume.setter
+    def volume(self, value):
+        """The book's volume"""
+        self.__volume = value
 
     @property
     def pages(self):

@@ -57,7 +57,8 @@ DEFAULT_APPS = [
     'rest_framework.authtoken',
     'apps.lwviewer',
     'apps.deepshelf',
-    'apps.accounts'
+    'apps.accounts',
+    'apps.home',
 ]
 
 # Middlewares
