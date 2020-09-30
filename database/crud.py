@@ -23,7 +23,7 @@ class CRUD(AbstractCRUD):
         model = base.find_model(collection)
         if model is not None:
             db_collection = self.connection[model.collection] 
-            document = collection.find_one(criteria)
+            document = db_collection.find_one(criteria)
             if document is not None:
                 model.set_from_document(document)
                 return model

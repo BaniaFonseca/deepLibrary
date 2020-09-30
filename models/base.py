@@ -88,13 +88,11 @@ class AbstractModel(abc.ABC):
         pass
 
     def set_from_document(self, document):
+        doc = document.copy()
         """Set model's properties with data from given document"""
-        for documentkey in document.keys():
+        for documentkey in doc.keys():
             value = document[documentkey]
-            if isinstance(value, list):
-                self.set_property(documentkey, value.copy())
-            else:
-                self.set_property(documentkey, value)
+            self.set_property(documentkey, value)
 
                     
     def set_property(self, property_name, value):
@@ -107,15 +105,13 @@ class AbstractModel(abc.ABC):
         """ Return the the model as a document or ```None``
             if the model properties are not setted yet
         """
-        document = {"collection" : self.collection}
-        for classproperty in self.__dict__.keys():
+        document = {}
+        class_properties = self.__dict__.copy()
+        for classproperty in class_properties.keys():
             documentkey = classproperty.split("__")
             documentkey = documentkey[1]
-            if self.__dict__[classproperty] is not None:
-                if isinstance(self.__dict__[classproperty], list):
-                    document[documentkey] = self.__dict__[classproperty].copy()
-                else:
-                    document[documentkey] = self.__dict__[classproperty]               
+            if class_properties[classproperty] is not None:
+                document[documentkey] = class_properties[classproperty]               
         
         if len(document) > 0:
             return document
@@ -123,9 +119,10 @@ class AbstractModel(abc.ABC):
             return None    
 
     def to_json(self):
-        if len(self.to_document() > 0):
+        if len(self.to_document()) > 0:
             json = self.to_document()
-            json['id'] = json.pop('_id')
+            json['id'] = str(json.pop('_id'))
+            json['collection'] = self.collection
             return json
         else:
             return None

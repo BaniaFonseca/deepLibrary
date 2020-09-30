@@ -15,7 +15,7 @@ class OSCRUD(oscrudabc.AbstractCRUD):
     def connection(self, value):
         self.__connection = value
     
-    def get_object(self, bucketname, objectname):
+    def get_one(self, bucketname, objectname):
         return self.connection.get_object(bucketname, objectname)
     
     def save_object(self, bucketname, objectname, data, length, contenttype):
