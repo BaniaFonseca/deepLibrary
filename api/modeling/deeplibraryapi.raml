@@ -17,9 +17,9 @@ types:
       base64EncodedPageContent:
         type: string
         required: true
-  Edocument:
+  DigitaldDocument:
     properties:
-      numberOfpages:
+      numberOfPages:
         type: integer
         required: true
       title:
@@ -38,7 +38,7 @@ types:
         type: string[]
         required: true
   Book:
-    type: Edocument
+    type: DigitaldDocument
     properties:
       isbn:
         type: string
@@ -58,6 +58,9 @@ types:
       language:
         type: string
         required: true
+resourceTypes:
+  collection: Collection of available <<resourcePathName>> in database
+  
 /books:
   description: Collection of available books
   /{bookId}:

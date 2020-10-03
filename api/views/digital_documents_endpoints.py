@@ -15,18 +15,20 @@ crud = CRUD()
 
 
 class PageView(APIView):
+    
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, collection, resourceid, pagenumber):
-        name = resourceid+str(pagenumber)
-        object = oscrud.get_one(collection, name)
+        name = resourceid+pagenumber
+        pagecontent = oscrud.get_one(collection, name)
         if object is None:
             return Response(status=status.HTTP_404_NOT_FOUND) 
         else:
-            return HttpResponse(content=object, content_type='application/pdf')        
+            return HttpResponse(content=pagecontent, content_type='application/pdf')        
             
 
 class DigitalDocumentView(APIView):
+    
     permission_classes = (IsAuthenticated,)
     
     def get(self, request, collection, resourceid):
