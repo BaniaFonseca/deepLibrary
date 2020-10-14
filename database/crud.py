@@ -40,7 +40,7 @@ class CRUD(AbstractCRUD):
         return None
     
     def update_one(self, model):
-        document = model.as_document()
+        document = model.to_document()
         if (len(document) > 0):
             collection = self.connection[model.collection]
             result = collection.replace_one({'_id': document['_id']}, document)

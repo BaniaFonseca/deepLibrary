@@ -3,6 +3,58 @@ title: DeepLibrary API
 baseUri: http://api.deeplibrary.io/{version}
 version: v1
 protocols: [HTTP, HTTPS]
+
+traits:
+  secured:
+    usage: Apply this to any method that needs to be secured
+    description: most requests require authentication.
+    headers:
+      Authorization:
+        displayName: Authorization
+        description: "The access token provided by the authentication application"
+        type: string
+        required: true
+        example: "Token 9af36176dddf7673d5e7de6c00860d580bbf0670"
+
+resourceTypes:
+  collection:
+    is: [secured]
+    usage: This resourceType should be used for any collection of items
+    description: Collection of available <<resourcePathName>>
+    get:
+      description: Get a list of <<resourcePathName>> based on the title.
+      responses:
+        200:
+          body:
+            application/json:
+    post:
+      description: Add a new <<resourcePathName | !singularize>>
+      body:
+        application/json:
+          type: <<resourcePathName | !singularize | !uppercamelcase>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: Message
+              example:
+                message: "The <<resourcePathName | !singularize>> has been properly entered"
+  collection-item:
+    is: [secured]
+    usage: This resourceType should be used for any item
+    description: A <<resourcePathName | !singularize | !uppercamelcase>> entity
+    get:
+      description: Get details of <<resourcePathName | !singularize>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<resourcePathName | !singularize | !uppercamelcase>>
+    put:
+      description: Update details of <<resourcePathName | !singularize>>
+      body: 
+        application/json:
+          type: <<resourcePathName | !singularize | !uppercamelcase>>
 types:
   Message:
     properties:
@@ -14,98 +66,50 @@ types:
       pageNumber:
         type: integer
         required: true
-      base64EncodedPageContent:
-        type: string
-        required: true
   DigitaldDocument:
     properties:
       numberOfPages:
         type: integer
-        required: true
       title:
         type: string
-        required: true
       year:
         type: integer
-        required: true
       country:
         type: string
-        required: true
       city:
         type: string
-        required: true
       authors:
         type: string[]
-        required: true
   Book:
     type: DigitaldDocument
     properties:
       isbn:
         type: string
-        required: true
       publisher:
         type: string
-        required: true
       preface:
         type: string
-        required: true
       volume:
         type: integer
-        required: true
       edition:
           type: integer
-          required: true
       language:
         type: string
-        required: true
-resourceTypes:
-  collection: Collection of available <<resourcePathName>> in database
-  
 /books:
-  description: Collection of available books
+  type: collection
+  get:
+  post:
   /{bookId}:
-    description: Book entity
+    type: collection-item
     get:
-      description: Get Details Of The Book With 'id = {bookId}'
-      responses:
-        200:
-          body:
-            application/json:
-              type: Book
-              properties:
-                id:
-                  type: string
-                  required: true
-              example:
-                id: "5f390b30ea0e67ac51555b32"
-                isbn: "978-1-118-99687-5"
-                title: "introduction to algorithms"
-                numberOfpages: 750
-                year: 2015
-                publisher: "John Wiley & Sons, Inc"
-                preface: ""
-                volume: 1
-                edition: 3
-                language: "english"
-                country: "US"
-                city: "New York"
-                authors: ["cormen h. thomas"]
+    put:
     /pages:
       description: Collection Of Pages Of The Book With 'id = {bookId}'
       post:
         description: Add new Page to the Book With 'id = {bookId}
-        queryParameters:
-          access_token:
-            description: "The access token provided by authentication application"
-            example: ABCDE
-            required: true
-            type: string
         body:
           application/json:
             type: Page
-            example:
-              pageNumber: 1
-              base64EncodedPageContent: "WYIWTYTQUY..."
         responses:
           200:
             body:
