@@ -1,7 +1,7 @@
 from unittest import TestCase
 from bson.objectid import ObjectId
 
-from models import base
+from models import base_model
 from api.models.digital_documents import *
 
 
@@ -24,12 +24,12 @@ class TestBase(TestCase):
                 "type" : "book" }
 
     def test_find_model_1(self):
-        model = base.find_model('books')
+        model = base_model.find_model('books')
         class_name = model.__class__.__name__
         self.assertEquals(class_name, 'Book')
 
     def test_find_model_2(self):
-        model = base.find_model('foo')
+        model = base_model.find_model('foo')
         self.assertIsNone(model)
 
         

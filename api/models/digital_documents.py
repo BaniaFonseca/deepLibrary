@@ -1,4 +1,4 @@
-from models.base import AbstractModel
+from models.base_model import AbstractModel
 
 class AbstractDigitalDocument(AbstractModel, is_abstract=True):
     """Abstract Model Class AbstractDigitalDocument  """

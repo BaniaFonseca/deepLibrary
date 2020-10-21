@@ -66,7 +66,7 @@ class AbstractModel(abc.ABC):
     def __init_subclass__(cls, is_abstract=False, **kwargs):
         super().__init_subclass__(**kwargs)
         if not is_abstract:
-            cls.subclasses[cls().collection] = cls()
+            cls.subclasses[cls().collection] = cls
 
     def __init__(self):
         self.id = None
@@ -131,6 +131,6 @@ def find_model(collection):
     """Return Model based on collection name"""
     for key in AbstractModel.subclasses.keys():
         if key == collection:
-            return AbstractModel.subclasses[collection]
+            return AbstractModel.subclasses[collection]()
     
     return None

@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 from database.crudabc import AbstractCRUD
 from database.connection import Connection
-from models import base
+from models import base_model
 
 class CRUD(AbstractCRUD):
 
@@ -20,15 +20,24 @@ class CRUD(AbstractCRUD):
         self.__connection = value
     
     def get_one(self, collection, criteria):
-        model = base.find_model(collection)
+        model = base_model.find_model(collection)
         if model is not None:
-            db_collection = self.connection[model.collection] 
+            db_collection = self.connection[collection] 
             document = db_collection.find_one(criteria)
             if document is not None:
                 model.set_from_document(document)
                 return model
         return None
-     
+
+    def get_many(self, collection, criteria=None):
+        models = []
+        db_collection = self.connection[collection]    
+        for doc in  db_collection.find(criteria):
+            model = base_model.find_model(collection)
+            model.set_from_document(doc)
+            models.append(model)
+        return models
+        
     def insert_one(self, model):
         document = model.to_document()
         if (len(document) > 0):
