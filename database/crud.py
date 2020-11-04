@@ -19,21 +19,21 @@ class CRUD(AbstractCRUD):
     def connection(self, value):
         self.__connection = value
     
-    def get_one(self, collection, criteria):
+    def get_one(self, collection_name, criteria):
         model = base_model.find_model(collection)
         if model is not None:
-            db_collection = self.connection[collection] 
-            document = db_collection.find_one(criteria)
+            collection = self.connection[collection_name] 
+            document = collection.find_one(criteria)
             if document is not None:
                 model.set_from_document(document)
                 return model
         return None
 
-    def get_many(self, collection, criteria=None):
+    def get_many(self, collection_name, criteria=None):
         models = []
-        db_collection = self.connection[collection]    
-        for doc in  db_collection.find(criteria):
-            model = base_model.find_model(collection)
+        collection = self.connection[collection_name]    
+        for doc in  collection.find(criteria):
+            model = base_model.find_model(collection_name)
             model.set_from_document(doc)
             models.append(model)
         return models
@@ -48,10 +48,26 @@ class CRUD(AbstractCRUD):
             return result.inserted_id
         return None
     
-    def update_one(self, model):
+    def replace_one(self, model):
         document = model.to_document()
         if (len(document) > 0):
             collection = self.connection[model.collection]
             result = collection.replace_one({'_id': document['_id']}, document)
             return result.modified_count
         return None
+
+    def update_one(self, collection_name, document, criteria=None):
+        if (len(document) > 0):
+            collection = self.connection[collection_name]
+            result = collection.update_one(criteria, {"$set": document})
+            return result.modified_count
+        return None
+    
+    def delete_one(self, collection_name, criteria=None):
+        collection = self.connection[collection_name]
+        collection.delete_one(criteria)
+        if collection.find(criteria) is None:
+            return True
+        else:
+            return False
+        

@@ -132,5 +132,4 @@ def find_model(collection):
     for key in AbstractModel.subclasses.keys():
         if key == collection:
             return AbstractModel.subclasses[collection]()
-    
     return None
