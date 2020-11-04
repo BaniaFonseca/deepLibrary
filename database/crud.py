@@ -20,7 +20,7 @@ class CRUD(AbstractCRUD):
         self.__connection = value
     
     def get_one(self, collection_name, criteria):
-        model = base_model.find_model(collection)
+        model = base_model.find_model(collection_name)
         if model is not None:
             collection = self.connection[collection_name] 
             document = collection.find_one(criteria)

@@ -8,33 +8,29 @@ from django.http import HttpResponse
 
 from bson.objectid import ObjectId
 
-from storage.oscrud import OSCRUD
 from database.crud import CRUD
 from models import base_model
 
-oscrud = OSCRUD()
 crud = CRUD()
 
 class Collection(APIView):
     permission_classes = [IsAuthenticated]
+    parser_classes = [JSONParser]
 
     def get(self, request, collection):
         if base_model.find_model(collection) is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
         models = crud.get_many(collection)
-        content = []
+        data = []
         for model in models:
-            content.append(model.to_json())
-        return Response(content)
+            data.append(model.to_json())
+        return Response(data)
 
     def post(self, request, collection):
         model = base_model.find_model(collection)
         if model is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        doc = JSONParser().parse(request)
-        model.set_from_document(doc)
-        if crud.insert_one(model) is None:
-            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        else:
-            message = "The resource has been succefully added"
-            return Response({'message': message})
+        model.set_from_document(request.data)
+        crud.insert_one(model)    
+        message = "The resource has been succefully added"
+        return Response({'message': message})

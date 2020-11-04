@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import JSONParser
+from rest_framework.parsers import BaseParser
 
 from django.http import HttpResponse
 
@@ -13,35 +14,49 @@ from storage.oscrud import OSCRUD
 from database.crud import CRUD
 from models import base_model
 
+import PyPDF2
+import io
+
 oscrud = OSCRUD()
 crud = CRUD()
-        
-class Resource(APIView):
+
+class PDFParser(BaseParser):
+    """
+    docstring
+    """
+    media_type = 'application/pdf'
+
+    def parse(self, stream, media_type=None, parser_context=None):
+        return stream.read()
+
+
+class Content(APIView):
     
     permission_classes = (IsAuthenticated,)
-    parser_classes = [JSONParser]
-    
-    def get(self, request, collection, resourceid):
+    parser_classes = [PDFParser]
+
+    def post(self, request, collection, resourceid):
         id = ObjectId(resourceid)
         model = crud.get_one(collection, {"_id": id})
         if model is None:
-            return Response(status=status.HTTP_404_NOT_FOUND) 
+            return Response(status=status.HTTP_404_NOT_FOUND)
         else:
-            data = model.to_json()
-            return Response(data)        
-    
+            with open("test.pdf", "wb") as data:
+                data.write(request.data)
+
     def put(self, request, collection, resourceid):
         id = ObjectId(resourceid)
         model = crud.get_one(collection, {"_id": id})
         if model is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
-            # document = JSONParser().parse(request)
+            document = JSONParser().parse(request)
             message = "The resource's details has been properly updated"
-            criteria = {'_id': id}
-            crud.update_one(collection, request.data, criteria)
-            return Response({'message': message})
-            
+            if crud.update_one(collection, document, {'_id': id}) is not None: 
+                return Response({'message': message})
+            else:
+                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
     def delete(self, request, collection, resourceid):
         id = ObjectId(resourceid)
         criteria = {"_id": id}
