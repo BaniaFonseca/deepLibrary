@@ -13,8 +13,8 @@ class AbstractCRUD(abc.ABC):
       """
 
   @abc.abstractmethod
-  def save_object(self, bucketname, objectname, data, length, content_type):
-      """Save a single object in the object storage
+  def put_object(self, bucketname, objectname, data, length, content_type):
+      """Put a single object in the object storage
 
       :Parameters:
 

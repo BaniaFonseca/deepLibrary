@@ -7,7 +7,7 @@ protocols: [HTTP, HTTPS]
 traits:
   secured:
     usage: Apply this to any method that needs to be secured
-    description: most requests require authentication.
+    description: Most requests require authentication.
     headers:
       Authorization:
         displayName: Authorization
@@ -52,9 +52,63 @@ resourceTypes:
               type: <<resourcePathName | !singularize | !uppercamelcase>>
     put:
       description: Update details of <<resourcePathName | !singularize>>
-      body: 
+      body:
         application/json:
           type: <<resourcePathName | !singularize | !uppercamelcase>>
+    delete:
+      description: Delete a <<resourcePathName | !singularize>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: Message
+              example:
+                message: "The <<resourcePathName | !singularize>> has succefully deleted"
+
+  content:
+    is: [secured]
+    description: The content of the <<resourcePathName | !singularize>>
+    put:
+      description: Update the content of the <<resourcePathName | !singularize>>
+      body:
+        application/pdf:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Message
+              example:
+                message: "Content updated successfully"
+    delete:
+      description: Delete the content of <<resourcePathName | !singularize>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: Message
+              example:
+                message: "Content deleted successfully"
+    post:
+      description: Insert content for <<resourcePathName | !singularize>>
+      body:
+        application/pdf:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Message
+              example:
+                message: "Content Inserted successfully"
+  page:
+    is: [secured]
+    description: The Page to be streamed
+    get:
+      description: Stream a page
+      responses:
+        200:
+          body:
+            application/pdf:
+
 types:
   Message:
     properties:
@@ -95,34 +149,23 @@ types:
           type: integer
       language:
         type: string
-/books:
+
+/{collection-name}:
   type: collection
   get:
   post:
-  /{bookId}:
+  /{resource-id}:
     type: collection-item
     get:
     put:
-    /pages:
-      description: Collection Of Pages Of The Book With 'id = {bookId}'
+    delete:
+    /content:
+      type: content
+      is: [secured]
       post:
-        description: Add new Page to the Book With 'id = {bookId}
-        body:
-          application/json:
-            type: Page
-        responses:
-          200:
-            body:
-              application/json:
-                type: Message
-                example:
-                  message: "The page has been succefully added"
-      /{pageNumber}:
-        description: The Page to be streamed to the client
-        get:
-          description: Get The Content Of The Page With 'number = {pageNumber}'
-          responses:
-            200:
-              body:
-                application/pdf:
-                  example: !include 5f390b30ea0e67ac51555b321.pdf
+      delete:
+      put:
+    /{page-number}:
+      type: page
+      is: [secured]
+      get:

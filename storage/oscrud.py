@@ -18,10 +18,13 @@ class OSCRUD(oscrudabc.AbstractCRUD):
     def get_one(self, bucketname, objectname):
         return self.connection.get_object(bucketname, objectname)
     
-    def save_object(self, bucketname, objectname, data, length, contenttype):
+    def put_object(self, bucketname, objectname, data, length, contenttype):
         self.connection.put_object(
             bucketname, 
             objectname,
             data,
             length,
             contenttype)
+    
+    def remove_objects(bucket_name, objects_iter):
+        self.connection.remove_objects(bucket_name, objects_iter)
