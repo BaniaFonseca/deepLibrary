@@ -10,6 +10,16 @@ class AbstractDigitalDocument(AbstractModel, is_abstract=True):
         self.country = None
         self.city = None
         self.authors = None
+        self.index = None
+
+    @property
+    def index(self):
+        """index for fast page access"""
+        return self.__index 
+    
+    @index.setter
+    def index(self, value):
+        self.__index = value
 
     @property
     def type(self):

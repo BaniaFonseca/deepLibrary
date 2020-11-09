@@ -21,8 +21,8 @@ class Resource(APIView):
     permission_classes = (IsAuthenticated,)
     parser_classes = [JSONParser]
     
-    def get(self, request, collection, resourceid):
-        id = ObjectId(resourceid)
+    def get(self, request, collection, resource_id):
+        id = ObjectId(resource_id)
         model = crud.get_one(collection, {"_id": id})
         if model is None:
             return Response(status=status.HTTP_404_NOT_FOUND) 
@@ -30,8 +30,8 @@ class Resource(APIView):
             data = model.to_json()
             return Response(data)        
     
-    def put(self, request, collection, resourceid):
-        id = ObjectId(resourceid)
+    def put(self, request, collection, resource_id):
+        id = ObjectId(resource_id)
         model = crud.get_one(collection, {"_id": id})
         if model is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
@@ -42,8 +42,8 @@ class Resource(APIView):
             crud.update_one(collection, request.data, criteria)
             return Response({'message': message})
             
-    def delete(self, request, collection, resourceid):
-        id = ObjectId(resourceid)
+    def delete(self, request, collection, resource_id):
+        id = ObjectId(resource_id)
         criteria = {"_id": id}
         model = crud.get_one(collection, criteria)
         if model is None:

@@ -3,7 +3,7 @@ import abc
 class AbstractCRUD(abc.ABC):
   """ Object Storage CRUD Abstract Class"""
   @abc.abstractmethod
-  def get_one(self, bucketname, objectname):
+  def get_object(self, bucketname, objectname):
       """Get a single object from the object storage
 
       :Parameters:
