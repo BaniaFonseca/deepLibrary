@@ -2,7 +2,7 @@ from unittest import TestCase
 from bson.objectid import ObjectId
 
 from models import base_model
-from api.models.digital_documents import *
+from api.models.resources import *
 
 
 class TestBase(TestCase):
